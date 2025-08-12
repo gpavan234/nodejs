@@ -1,19 +1,16 @@
 import express from 'express';
+import userController from './controllers/userController.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/users', (_req, res) => {
-  res.json([{ id: 1, name: 'John Doe' }, { id: 2, name: 'Jane Doe' }]);
-});
+// Route for homepage
+app.get('/', userController.index);
 
-
+// Start server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
-
-export default app;
