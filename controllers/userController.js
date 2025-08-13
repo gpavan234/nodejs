@@ -1,10 +1,7 @@
 import User from '../models/users.js';
 
 const index = (req, res) => {
-  const users = User.getAllUsers();
-  res.render('index', { users });
+  res.send('Welcome to the homepage');
 };
 
-export default {
-  index,
-};
+export default { index };

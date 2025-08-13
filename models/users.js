@@ -1,12 +1,13 @@
 // models/user.js
-const users = [
-  { id: 1, name: 'Pavan' },
-  { id: 2, name: 'Alice' },
-    { id: 3, name: 'Bob', age: 30 }
-];
+import e from "express";
+import mongoose from "mongoose";
 
-const getAllUsers = () => users;
+const UserSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
+});
 
-export default {
-  getAllUsers,
-};
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
+
+export default User;
