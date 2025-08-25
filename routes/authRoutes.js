@@ -1,5 +1,5 @@
 import express from 'express';
-import { signup, login, profile, adminOnly } from '../controllers/authController.js';
+import { signup, login, profile, adminOnly, updateUserProfile } from "../controllers/authController.js";
 import auth from '../middlewares/authMiddleware.js';
 import authorize from '../middlewares/authorize.js';    
 import validate from '../middlewares/validate.js';
@@ -28,7 +28,7 @@ router.post(
   login
 );
 
-router.get('/profile', auth, profile);
+router.route("/profile").get(auth, profile).put(auth, updateUserProfile);
 router.get('/admin', auth, authorize(['admin']), adminOnly);
 
 export default router;
